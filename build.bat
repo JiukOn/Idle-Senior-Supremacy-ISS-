@@ -45,10 +45,13 @@ if exist "%ROOT_DIR%assets\iss-icon.ico" copy /y "%ROOT_DIR%assets\iss-icon.ico"
 if exist "%CONFIG_DIR%\runtimes" (
     xcopy /e /y /i /q "%CONFIG_DIR%\runtimes\*" "%RUNTIMES_DIR%\" >nul
 )
+if exist "assets\iss-icon.ico" (
+    copy /y "assets\iss-icon.ico" "%CONFIG_DIR%\iss-icon.ico" >nul
+)
 
 echo.
 echo [5/5] Criando atalho ISS.lnk e gerando pacote ZIP...
-powershell -NoProfile -Command "$ws = New-Object -ComObject WScript.Shell; $s = $ws.CreateShortcut('%PUBLISH_ROOT%\ISS.lnk'); $s.TargetPath = '%CONFIG_DIR%\IdleSenior.UI.exe'; $s.WorkingDirectory = '%CONFIG_DIR%'; $s.IconLocation = '%CONFIG_DIR%\iss-icon.ico,0'; $s.Save()"
+powershell -NoProfile -Command "$ws = New-Object -ComObject WScript.Shell; $s = $ws.CreateShortcut('%PUBLISH_ROOT%\ISS.lnk'); $s.TargetPath = '%CONFIG_DIR%\IdleSenior.UI.exe'; $s.WorkingDirectory = '%CONFIG_DIR%'; $s.IconLocation = '%CONFIG_DIR%\IdleSenior.UI.exe,0'; $s.Save()"
 powershell -NoProfile -Command "Compress-Archive -Path '%PUBLISH_ROOT%\*' -DestinationPath '%ZIP_PATH%' -Force"
 if errorlevel 1 (
     echo [AVISO] Nao foi possivel gerar o .zip automaticamente, mas a pasta publish esta pronta.
