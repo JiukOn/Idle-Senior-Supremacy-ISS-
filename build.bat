@@ -28,17 +28,25 @@ if exist "%ZIP_PATH%" del /f /q "%ZIP_PATH%"
 mkdir "%CONFIG_DIR%"
 
 echo.
-echo [3/5] Publicando IdleSenior.UI em config\ (win-x86 self-contained)...
+echo [3/5] Publicando IdleSenior.UI e workers em config\ (win-x86 self-contained)...
 dotnet publish "%UI_PROJ%" -c Release -r win-x86 --self-contained true -o "%CONFIG_DIR%" /p:PublishSingleFile=false
 if errorlevel 1 (
     echo [ERRO] Falha ao publicar IdleSenior.UI.
     exit /b 1
 )
+dotnet publish "%ROOT_DIR%src\IdleSenior.Worker\IdleSenior.Worker.csproj" -c Release -r win-x86 --self-contained true -o "%CONFIG_DIR%" /p:PublishSingleFile=false
+if errorlevel 1 (
+    echo [ERRO] Falha ao publicar IdleSenior.Worker.
+    exit /b 1
+)
+dotnet publish "%ROOT_DIR%src\IdleSenior.AchievementWorker\IdleSenior.AchievementWorker.csproj" -c Release -r win-x86 --self-contained true -o "%CONFIG_DIR%" /p:PublishSingleFile=false
+if errorlevel 1 (
+    echo [ERRO] Falha ao publicar IdleSenior.AchievementWorker.
+    exit /b 1
+)
 
 echo.
-echo [4/5] Organizando pastas (runtimes\ e config\) + workers e DLLs...
-xcopy /y /i /q "%ROOT_DIR%src\IdleSenior.Worker\bin\Release\net9.0\*.*" "%CONFIG_DIR%\" >nul
-xcopy /y /i /q "%ROOT_DIR%src\IdleSenior.AchievementWorker\bin\Release\net9.0\*.*" "%CONFIG_DIR%\" >nul
+echo [4/5] Organizando pastas (runtimes\ e config\) + DLLs nativas...
 if exist "%ROOT_DIR%src\NativeLibs\x86\steam_api.dll" copy /y "%ROOT_DIR%src\NativeLibs\x86\steam_api.dll" "%CONFIG_DIR%\" >nul
 if exist "%ROOT_DIR%src\NativeLibs\x64\steam_api64.dll" copy /y "%ROOT_DIR%src\NativeLibs\x64\steam_api64.dll" "%CONFIG_DIR%\" >nul
 if exist "%ROOT_DIR%assets\iss-icon.ico" copy /y "%ROOT_DIR%assets\iss-icon.ico" "%CONFIG_DIR%\iss-icon.ico" >nul

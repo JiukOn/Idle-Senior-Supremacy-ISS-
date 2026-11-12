@@ -13,7 +13,46 @@
                   VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Disabled"
                   helpers:ScrollBubbleHelper.EnableSmoothScroll="True">
-        <Grid Margin="{DynamicResource PageMargin}">
+        <StackPanel Margin="{DynamicResource PageMargin}">
+            <!-- ── Update Available Banner (dismissible) ────────────────── -->
+            <Border x:Name="UpdateBanner"
+                    Visibility="Collapsed"
+                    Background="#228be9fd"
+                    BorderBrush="#558be9fd"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="14,10"
+                    Margin="0,0,0,16">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <ui:SymbolIcon Symbol="ArrowDownload24" FontSize="18" Foreground="#8be9fd" Margin="0,0,10,0"/>
+                        <ui:TextBlock x:Name="UpdateBannerText"
+                                      Text="New version available"
+                                      FontSize="13" FontWeight="SemiBold"
+                                      VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                        <ui:Button x:Name="UpdateDownloadBtn"
+                                   Content="Download"
+                                   Appearance="Primary"
+                                   Padding="12,5"
+                                   Margin="0,0,8,0"
+                                   Click="UpdateDownloadBtn_Click"/>
+                        <ui:Button x:Name="UpdateDismissBtn"
+                                   Icon="{ui:SymbolIcon Dismiss16}"
+                                   Appearance="Transparent"
+                                   Padding="6"
+                                   ToolTip="Dismiss"
+                                   Click="UpdateDismissBtn_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -489,5 +528,6 @@
                 </Grid>
             </ui:Card>
         </Grid>
+        </StackPanel>
     </ScrollViewer>
 </Page>

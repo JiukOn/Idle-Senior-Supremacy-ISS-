@@ -27,6 +27,8 @@ namespace IdleSenior.UI.Views.Pages
         private AccountAnalyticsModel _currentModel = new();
         private List<GameModel> _allOwnedGames = new();
         private GameModel? _suggestedGame;
+        private bool _updateChecked;
+        private string? _latestReleaseUrl;
 
         private static readonly string[] _triviaFacts = new[]
         {
@@ -62,8 +64,63 @@ namespace IdleSenior.UI.Views.Pages
             Loaded += DashboardPage_Loaded;
         }
 
-        private async void DashboardPage_Loaded(object sender, RoutedEventArgs e) =>
+        private async void DashboardPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!_updateChecked)
+            {
+                _updateChecked = true;
+                _ = CheckForUpdatesAsync();
+            }
             await LoadDashboardAsync(forceRefresh: false);
+        }
+
+        private async Task CheckForUpdatesAsync()
+        {
+            try
+            {
+                using var http = new System.Net.Http.HttpClient { Timeout = TimeSpan.FromSeconds(5) };
+                http.DefaultRequestHeaders.UserAgent.ParseAdd("IdleSeniorSupremacy");
+                var json = await http.GetStringAsync("https://api.github.com/repos/JiukOn/Idle-Senior-Supremacy-ISS-/releases/latest");
+
+                using var doc = System.Text.Json.JsonDocument.Parse(json);
+                var root = doc.RootElement;
+                if (!root.TryGetProperty("tag_name", out var tagProp))
+                    return;
+
+                var rawTag = (tagProp.GetString() ?? "").Trim().TrimStart('v', 'V');
+                if (!Version.TryParse(rawTag, out var latestVersion))
+                    return;
+
+                var currentVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version ?? new Version(1, 0, 0);
+                if (latestVersion <= currentVersion)
+                    return;
+
+                _latestReleaseUrl = root.TryGetProperty("html_url", out var urlProp)
+                    ? urlProp.GetString()
+                    : "https://github.com/JiukOn/Idle-Senior-Supremacy-ISS-/releases/latest";
+
+                Dispatcher.Invoke(() =>
+                {
+                    UpdateBannerText.Text = $"New update available: v{rawTag} (current: v{currentVersion.ToString(3)})";
+                    UpdateBanner.Visibility = Visibility.Visible;
+                });
+            }
+            catch
+            {
+                // Silent fail when offline or rate-limited
+            }
+        }
+
+        private void UpdateDownloadBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var url = string.IsNullOrWhiteSpace(_latestReleaseUrl)
+                ? "https://github.com/JiukOn/Idle-Senior-Supremacy-ISS-/releases/latest"
+                : _latestReleaseUrl;
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(url) { UseShellExecute = true });
+        }
+
+        private void UpdateDismissBtn_Click(object sender, RoutedEventArgs e) =>
+            UpdateBanner.Visibility = Visibility.Collapsed;
 
         private async void Refresh_Click(object sender, RoutedEventArgs e)
         {

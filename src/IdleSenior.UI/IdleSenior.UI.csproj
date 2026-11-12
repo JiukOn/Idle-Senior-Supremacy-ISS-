@@ -44,7 +44,7 @@
     <UseWPF>true</UseWPF>
     <PlatformTarget>x86</PlatformTarget>
     <ApplicationIcon>..\..\assets\iss-icon.ico</ApplicationIcon>
-    <Version>1.0.0</Version>
+    <Version>0.1.1</Version>
     <Product>Idle Senior Supremacy</Product>
   </PropertyGroup>
 
