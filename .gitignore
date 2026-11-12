@@ -1,0 +1,61 @@
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+publish/
+*.zip
+
+# Visual Studio / Rider / VS Code
+.vs/
+.vscode/
+.idea/
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# .NET / NuGet
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.nupkg
+*.snupkg
+
+# Local / Archive / OS
+_archive/
+scratch/
+.env
+.env.*
+err.txt
+out.txt
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.tmp
+*.bak
+*.lnk
+
+# Runtime Data / Saves / Caches
+settings.json
+app_prices*.json
+app_descriptions.json
+recent_news.json
+*.cache
+*.db
+
+# Test Results / Coverage
+TestResults/
+coverage/

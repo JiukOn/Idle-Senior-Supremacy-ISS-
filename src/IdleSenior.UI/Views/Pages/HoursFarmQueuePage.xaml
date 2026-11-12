@@ -1,0 +1,222 @@
+<Page x:Class="IdleSenior.UI.Views.Pages.HoursFarmQueuePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:helpers="clr-namespace:IdleSenior.UI.Helpers"
+      mc:Ignorable="d"
+      d:DesignHeight="700" d:DesignWidth="1000"
+      Title="Fila de Farm de Horas">
+
+    <Grid Margin="{DynamicResource PageMargin}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0" Margin="{DynamicResource SectionSpacing}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <ui:TextBlock Text="Fila de Farm de Horas"
+                                  Style="{StaticResource PageTitleStyle}"/>
+                    <Border Background="{DynamicResource ControlFillColorSecondaryBrush}"
+                            BorderBrush="{DynamicResource SystemAccentColorBrush}"
+                            BorderThickness="1" CornerRadius="8" Padding="10,4" Margin="14,0,0,0"
+                            VerticalAlignment="Center">
+                        <ui:TextBlock x:Name="SteamSlotsText"
+                                      Text="Steam: 0 / 32 ativos"
+                                      FontSize="12" FontWeight="SemiBold"
+                                      Foreground="{DynamicResource SystemAccentColorBrush}"/>
+                    </Border>
+                </StackPanel>
+                <ui:TextBlock x:Name="ModeSubtitleText"
+                              Text="Gerencie a ordem, metas e execução dos jogos no farm de horas."
+                              Style="{StaticResource PageSubtitleStyle}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <ui:Button x:Name="ToggleBulkAddBtn"
+                           Content="+ Adicionar Jogos"
+                           Icon="{ui:SymbolIcon Symbol=Add24}"
+                           Appearance="Secondary"
+                           Click="ToggleBulkAdd_Click"
+                           Padding="14,10"
+                           Margin="0,0,8,0"/>
+                <ui:Button x:Name="StartAllHoursBtn"
+                           Content="Iniciar Todos"
+                           Icon="{ui:SymbolIcon Symbol=Play24}"
+                           Appearance="Primary"
+                           Click="StartAllHours_Click"
+                           Padding="14,10"
+                           Margin="0,0,8,0"/>
+                <ui:Button x:Name="StopAllHoursBtn"
+                           Content="Parar Todos"
+                           Icon="{ui:SymbolIcon Symbol=Stop24}"
+                           Appearance="Danger"
+                           Click="StopAllHours_Click"
+                           Padding="14,10"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Bulk Add Panel (Collapsed by default) -->
+        <ui:Card Grid.Row="1" x:Name="BulkAddCard" Visibility="Collapsed" Padding="16" Margin="0,0,0,16">
+            <StackPanel>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <ui:TextBox x:Name="BulkSearchBox" Grid.Column="0"
+                                PlaceholderText="Filtrar jogos da sua biblioteca..."
+                                Icon="{ui:SymbolIcon Symbol=Search24}"
+                                TextChanged="BulkSearchBox_TextChanged"
+                                Margin="0,0,10,0"/>
+                    <ui:TextBox x:Name="BulkTargetInput" Grid.Column="1"
+                                Text="10"
+                                PlaceholderText="Meta (horas)"
+                                Icon="{ui:SymbolIcon Symbol=History24}"
+                                Margin="0,0,10,0"/>
+                    <ui:Button Grid.Column="2" Content="Selecionar Visíveis"
+                               Appearance="Secondary"
+                               Click="SelectVisibleBulk_Click"
+                               Padding="12,8"
+                               Margin="0,0,8,0"/>
+                    <ui:Button Grid.Column="3" Content="Adicionar Selecionados"
+                               Icon="{ui:SymbolIcon Symbol=Checkmark24}"
+                               Appearance="Primary"
+                               Click="ConfirmBulkAdd_Click"
+                               Padding="14,8"/>
+                </Grid>
+
+                <ScrollViewer MaxHeight="220" VerticalScrollBarVisibility="Auto"
+                              helpers:ScrollBubbleHelper.EnableSmoothScroll="True">
+                    <ItemsControl x:Name="BulkGamesList">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Content="{Binding Name}"
+                                          IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                          Width="280" Margin="0,0,12,6"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </StackPanel>
+        </ui:Card>
+
+        <!-- Empty State -->
+        <ui:Card Grid.Row="2" x:Name="EmptyStateCard" Visibility="Collapsed" Padding="24" Margin="0,0,0,16">
+            <StackPanel HorizontalAlignment="Center">
+                <ui:SymbolIcon Symbol="History24" FontSize="34" Margin="0,0,0,10"
+                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                <ui:TextBlock Text="Nenhum jogo na fila de farm de horas"
+                              FontSize="16" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                <ui:TextBlock Text="Clique em '+ Adicionar Jogos' acima ou abra qualquer jogo na Biblioteca e clique em 'Farmar'."
+                              FontSize="12" Appearance="Secondary" Margin="0,4,0,0" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </ui:Card>
+
+        <!-- Queue List -->
+        <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto"
+                      helpers:ScrollBubbleHelper.EnableSmoothScroll="True">
+            <ItemsControl x:Name="QueueItemsControl">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ui:Card Margin="0,0,0,10" Padding="16">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Reorder Up/Down -->
+                                <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center" Margin="0,0,14,0">
+                                    <ui:Button Icon="{ui:SymbolIcon Symbol=ChevronUp24}"
+                                               Appearance="Transparent"
+                                               Padding="6,3"
+                                               ToolTip="Mover para cima (prioridade)"
+                                               IsEnabled="{Binding CanMoveUp}"
+                                               Tag="{Binding AppId}"
+                                               Click="MoveUp_Click"/>
+                                    <ui:Button Icon="{ui:SymbolIcon Symbol=ChevronDown24}"
+                                               Appearance="Transparent"
+                                               Padding="6,3"
+                                               ToolTip="Mover para baixo"
+                                               IsEnabled="{Binding CanMoveDown}"
+                                               Tag="{Binding AppId}"
+                                               Click="MoveDown_Click"/>
+                                </StackPanel>
+
+                                <!-- Game Name & Status -->
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0"
+                                            Cursor="Hand" Tag="{Binding AppId}"
+                                            MouseLeftButtonUp="GameTitle_Click">
+                                    <ui:TextBlock Text="{Binding Name}"
+                                                  FontSize="15" FontWeight="SemiBold"
+                                                  TextTrimming="CharacterEllipsis"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                                        <ui:TextBlock Text="{Binding StatusText}"
+                                                      FontSize="12" FontWeight="SemiBold"
+                                                      Foreground="{Binding StatusBrush}"
+                                                      Margin="0,0,12,0"/>
+                                        <ui:TextBlock Text="{Binding AppIdText}"
+                                                      FontSize="11" Appearance="Secondary"
+                                                      VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <!-- Elapsed Time -->
+                                <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="0,0,24,0" MinWidth="105">
+                                    <ui:TextBlock Text="Tempo Farmando" FontSize="11" Appearance="Secondary"/>
+                                    <ui:TextBlock Text="{Binding ElapsedText}"
+                                                  FontSize="16" FontWeight="Bold"
+                                                  Foreground="{DynamicResource SystemAccentColorBrush}"/>
+                                </StackPanel>
+
+                                <!-- Target Hours -->
+                                <StackPanel Grid.Column="3" VerticalAlignment="Center" Margin="0,0,24,0" MinWidth="90">
+                                    <ui:TextBlock Text="Meta (Alvo)" FontSize="11" Appearance="Secondary"/>
+                                    <ui:TextBlock Text="{Binding TargetText}"
+                                                  FontSize="15" FontWeight="SemiBold"/>
+                                </StackPanel>
+
+                                <!-- Action Buttons -->
+                                <StackPanel Grid.Column="4" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <ui:Button Content="{Binding PrimaryActionText}"
+                                               Appearance="{Binding PrimaryActionAppearance}"
+                                               Icon="{Binding PrimaryActionIcon}"
+                                               Tag="{Binding AppId}"
+                                               Click="PrimaryAction_Click"
+                                               Padding="14,8"
+                                               Margin="0,0,8,0"/>
+                                    <ui:Button Icon="{ui:SymbolIcon Symbol=Dismiss24}"
+                                               Appearance="Secondary"
+                                               ToolTip="Remover da fila"
+                                               Tag="{Binding AppId}"
+                                               Click="RemoveFromQueue_Click"
+                                               Padding="10,8"/>
+                                </StackPanel>
+                            </Grid>
+                        </ui:Card>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Page>

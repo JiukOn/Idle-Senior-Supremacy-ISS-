@@ -1,0 +1,408 @@
+<Page x:Class="IdleSenior.UI.Views.Pages.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:helpers="clr-namespace:IdleSenior.UI.Helpers"
+      mc:Ignorable="d"
+      d:DesignHeight="850" d:DesignWidth="860"
+      Title="Settings">
+
+    <ScrollViewer x:Name="SettingsScrollViewer"
+                  Margin="{DynamicResource PageMargin}"
+                  VerticalScrollBarVisibility="Visible"
+                  HorizontalScrollBarVisibility="Disabled"
+                  helpers:ScrollBubbleHelper.EnableSmoothScroll="True">
+        <StackPanel MaxWidth="800">
+
+            <!-- ── Page header ──────────────────────────────────────────── -->
+            <ui:TextBlock Text="{DynamicResource Settings_Title}"
+                          Style="{StaticResource PageTitleStyle}"
+                          Margin="0,0,0,4"/>
+            <ui:TextBlock Text="{DynamicResource Settings_Subtitle}"
+                          Style="{StaticResource PageSubtitleStyle}"
+                          Margin="0,0,0,24"/>
+
+            <!-- ── Appearance & Theme ────────────────────────────────────── -->
+            <ui:Card Margin="{DynamicResource ItemSpacing}" Padding="22">
+                <StackPanel>
+                    <ui:TextBlock Text="{DynamicResource Settings_AppearanceSection}"
+                                  FontWeight="Bold" FontSize="16" Margin="0,0,0,18"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,16,0">
+                            <ui:TextBlock Text="{DynamicResource Settings_ThemeLabel}"
+                                          FontWeight="SemiBold"/>
+                            <ui:TextBlock Text="{DynamicResource Settings_ThemeDesc}"
+                                          Appearance="Secondary" FontSize="12" TextWrapping="Wrap" Margin="0,3,0,0"/>
+                        </StackPanel>
+                        <ComboBox Grid.Column="1" Width="240" VerticalAlignment="Center"
+                                  SelectedValuePath="Tag"
+                                  SelectedValue="{Binding SelectedTheme, Mode=TwoWay}">
+                            <ComboBoxItem Content="{DynamicResource Settings_Theme_Light}"    Tag="Light"/>
+                            <ComboBoxItem Content="{DynamicResource Settings_Theme_Spring}"   Tag="Spring"/>
+                            <ComboBoxItem Content="{DynamicResource Settings_Theme_Dark}"     Tag="Dark"/>
+                            <ComboBoxItem Content="{DynamicResource Settings_Theme_Dracula}"  Tag="Dracula"/>
+                            <ComboBoxItem Content="{DynamicResource Settings_Theme_Midnight}" Tag="Midnight"/>
+                        </ComboBox>
+                    </Grid>
+                </StackPanel>
+            </ui:Card>
+
+            <!-- ── Language ─────────────────────────────────────────────── -->
+            <ui:Card Margin="{DynamicResource ItemSpacing}" Padding="22">
+                <StackPanel>
+                    <ui:TextBlock Text="{DynamicResource Settings_LanguageSection}"
+                                  FontWeight="Bold" FontSize="16" Margin="0,0,0,18"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,16,0">
+                            <ui:TextBlock Text="{DynamicResource Settings_LanguageLabel}"
+                                          FontWeight="SemiBold"/>
+                            <ui:TextBlock Text="{DynamicResource Settings_LanguageDesc}"
+                                          Appearance="Secondary" FontSize="12" TextWrapping="Wrap" Margin="0,3,0,0"/>
+                        </StackPanel>
+                        <ComboBox Grid.Column="1" Width="240" VerticalAlignment="Center"
+                                  SelectedValuePath="Tag"
+                                  SelectedValue="{Binding SelectedLanguage, Mode=TwoWay}">
+                            <ComboBoxItem Content="{DynamicResource Settings_Lang_PTBR}" Tag="pt-BR"/>
+                            <ComboBoxItem Content="{DynamicResource Settings_Lang_ENUS}" Tag="en-US"/>
+                        </ComboBox>
+                    </Grid>
+
+                    <!-- Currency selector right below Language -->
+                    <Grid Margin="0,16,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,16,0">
+                            <ui:TextBlock Text="Moeda da Loja Steam"
+                                          FontWeight="SemiBold"/>
+                            <ui:TextBlock Text="Busca os preços originais da loja Steam na moeda selecionada (sem conversão artificial)."
+                                          Appearance="Secondary" FontSize="12" TextWrapping="Wrap" Margin="0,3,0,0"/>
+                        </StackPanel>
+                        <ComboBox Grid.Column="1" Width="240" VerticalAlignment="Center"
+                                  SelectedValuePath="Tag"
+                                  SelectedValue="{Binding SelectedCurrency, Mode=TwoWay}">
+                            <ComboBoxItem Content="BRL — Real (R$)" Tag="BRL"/>
+                            <ComboBoxItem Content="USD — Dólar ($)" Tag="USD"/>
+                            <ComboBoxItem Content="EUR — Euro (€)" Tag="EUR"/>
+                            <ComboBoxItem Content="GBP — Libra (£)" Tag="GBP"/>
+                        </ComboBox>
+                    </Grid>
+                </StackPanel>
+            </ui:Card>
+
+            <!-- ── Pagination / Games per Page ──────────────────────────── -->
+            <ui:Card Margin="{DynamicResource ItemSpacing}" Padding="22">
+                <StackPanel>
+                    <ui:TextBlock Text="Paginação e Biblioteca"
+                                  FontWeight="Bold" FontSize="16" Margin="0,0,0,18"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,16,0">
+                            <ui:TextBlock Text="Jogos por Página"
+                                          FontWeight="SemiBold"/>
+                            <ui:TextBlock Text="Quantidade de títulos exibidos simultaneamente nas abas Minha Biblioteca e Conquistas."
+                                          Appearance="Secondary" FontSize="12" TextWrapping="Wrap" Margin="0,3,0,0"/>
+                        </StackPanel>
+                        <ComboBox Grid.Column="1" Width="240" VerticalAlignment="Center"
+                                  SelectedValuePath="Tag"
+                                  SelectedValue="{Binding GamesPerPage, Mode=TwoWay}">
+                            <ComboBoxItem Content="25 jogos por página"  Tag="25"/>
+                            <ComboBoxItem Content="50 jogos por página"  Tag="50"/>
+                            <ComboBoxItem Content="75 jogos por página"  Tag="75"/>
+                            <ComboBoxItem Content="100 jogos por página" Tag="100"/>
+                            <ComboBoxItem Content="150 jogos por página" Tag="150"/>
+                        </ComboBox>
+                    </Grid>
+                </StackPanel>
+            </ui:Card>
+
+            <!-- ── Steam identity ────────────────────────────────────────── -->
+            <ui:Card Margin="{DynamicResource ItemSpacing}" Padding="22">
+                <StackPanel>
+                    <ui:TextBlock Text="{DynamicResource Settings_SteamSection}"
+                                  FontWeight="Bold" FontSize="16" Margin="0,0,0,6"/>
+                    <ui:TextBlock Text="{DynamicResource Settings_SteamDesc}"
+                                  Appearance="Secondary" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,14"/>
+
+                    <!-- Auto-Detect Local Steam Banner -->
+                    <Border Background="{DynamicResource ControlFillColorSecondaryBrush}"
+                            CornerRadius="8" Padding="14,12" Margin="0,0,0,18">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,12,0">
+                                <ui:TextBlock x:Name="DetectedAccountLabel"
+                                              Text="Detecção Automática da Steam Local"
+                                              FontWeight="Bold" FontSize="13"/>
+                                <ui:TextBlock x:Name="DetectedAccountSubtext"
+                                              Text="Clique ao lado para preencher automaticamente o SteamID64 e a URL da conta conectada no seu PC."
+                                              Appearance="Secondary" FontSize="11" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                                <ComboBox x:Name="LocalAccountsCombo"
+                                          Visibility="Collapsed"
+                                          DisplayMemberPath="DisplayLabel"
+                                          SelectionChanged="LocalAccountsCombo_SelectionChanged"
+                                          Margin="0,8,0,0"/>
+                            </StackPanel>
+                            <ui:Button Grid.Column="1"
+                                       x:Name="AutoDetectBtn"
+                                       Content="{DynamicResource Settings_AutoDetectBtn}"
+                                       Appearance="Primary"
+                                       Click="AutoDetectSteam_Click"
+                                       VerticalAlignment="Center"
+                                       Padding="16,9"/>
+                        </Grid>
+                    </Border>
+
+                    <ui:TextBlock Text="{DynamicResource Settings_SteamId64Label}"
+                                  FontWeight="SemiBold" Margin="0,0,0,6"/>
+                    <ui:TextBox PlaceholderText="{DynamicResource Settings_SteamId64Placeholder}"
+                                Icon="{ui:SymbolIcon Symbol=Person24}"
+                                Text="{Binding SteamId64, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Margin="0,0,0,16"/>
+
+                    <ui:TextBlock Text="{DynamicResource Settings_ProfileUrlLabel}"
+                                  FontWeight="SemiBold" Margin="0,0,0,6"/>
+                    <Grid Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ui:TextBox Grid.Column="0"
+                                    PlaceholderText="{DynamicResource Settings_ProfileUrlPlaceholder}"
+                                    Icon="{ui:SymbolIcon Symbol=Link24}"
+                                    Text="{Binding ProfileUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Margin="0,0,10,0"/>
+                        <ui:Button Grid.Column="1"
+                                   x:Name="ResolveUrlBtn"
+                                   Content="{DynamicResource Settings_ResolveUrlBtn}"
+                                   Appearance="Secondary"
+                                   Click="ResolveProfileUrl_Click"
+                                   Padding="14,8"/>
+                    </Grid>
+
+                    <ui:TextBlock Text="{DynamicResource Settings_ApiKeyLabel}"
+                                  FontWeight="SemiBold" Margin="0,0,0,6"/>
+                    <ui:TextBox PlaceholderText="{DynamicResource Settings_ApiKeyPlaceholder}"
+                                Icon="{ui:SymbolIcon Symbol=Key24}"
+                                Text="{Binding SteamApiKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Margin="0,0,0,8"/>
+                    <WrapPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <ui:TextBlock Text="{DynamicResource Settings_ApiKeyHint}"
+                                      Appearance="Secondary" FontSize="11"
+                                      VerticalAlignment="Center" Margin="0,0,12,0"/>
+                        <ui:Button Content="{DynamicResource Settings_OpenApiKeyPageBtn}"
+                                   Appearance="Secondary"
+                                   Click="OpenApiKeyPage_Click"
+                                   FontSize="11" Padding="10,4"/>
+                    </WrapPanel>
+                </StackPanel>
+            </ui:Card>
+
+            <!-- ── Card farm authentication ──────────────────────────────── -->
+            <ui:Card Margin="{DynamicResource ItemSpacing}" Padding="22">
+                <StackPanel>
+                    <ui:TextBlock Text="{DynamicResource Settings_FarmSection}"
+                                  FontWeight="Bold" FontSize="16" Margin="0,0,0,6"/>
+                    <ui:TextBlock Text="{DynamicResource Settings_FarmDesc}"
+                                  Appearance="Secondary" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,18"/>
+
+                    <ui:TextBlock Text="sessionid" FontWeight="SemiBold" Margin="0,0,0,6"/>
+                    <Grid Margin="0,0,0,4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <PasswordBox x:Name="SessionIdBox" FontFamily="Consolas" MaxLength="4096"
+                                     PasswordChanged="SessionIdBox_PasswordChanged"/>
+                        <TextBox x:Name="SessionIdTextBox" FontFamily="Consolas" MaxLength="4096"
+                                 Visibility="Collapsed" TextChanged="SessionIdTextBox_TextChanged"/>
+                        <ui:Button Grid.Column="1" x:Name="ToggleSessionIdBtn" Margin="6,0,0,0"
+                                   Icon="{ui:SymbolIcon Symbol=Eye24}" Appearance="Transparent"
+                                   Click="ToggleSessionId_Click" ToolTip="Mostrar/Ocultar sessionid"/>
+                    </Grid>
+                    <ui:TextBlock Text="{DynamicResource Settings_SessionIdHint}"
+                                  Appearance="Secondary" FontSize="11" Margin="0,0,0,16"/>
+
+                    <ui:TextBlock Text="steamLoginSecure" FontWeight="SemiBold" Margin="0,0,0,6"/>
+                    <Grid Margin="0,0,0,4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <PasswordBox x:Name="LoginSecureBox" FontFamily="Consolas" MaxLength="4096"
+                                     PasswordChanged="LoginSecureBox_PasswordChanged"/>
+                        <TextBox x:Name="LoginSecureTextBox" FontFamily="Consolas" MaxLength="4096"
+                                 Visibility="Collapsed" TextChanged="LoginSecureTextBox_TextChanged"/>
+                        <ui:Button Grid.Column="1" x:Name="ToggleLoginSecureBtn" Margin="6,0,0,0"
+                                   Icon="{ui:SymbolIcon Symbol=Eye24}" Appearance="Transparent"
+                                   Click="ToggleLoginSecure_Click" ToolTip="Mostrar/Ocultar steamLoginSecure"/>
+                    </Grid>
+                    <ui:TextBlock Text="{DynamicResource Settings_LoginSecureHint}"
+                                  Appearance="Secondary" FontSize="11" Margin="0,0,0,16"/>
+
+                    <WrapPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <ui:Button Content="{DynamicResource Settings_HowToGet}"
+                                   Icon="{ui:SymbolIcon Symbol=Question24}"
+                                   Click="Help_Click" Appearance="Secondary"
+                                   Margin="0,0,10,6"/>
+                        <ui:Button Content="{DynamicResource Settings_OpenSteamBadgesBtn}"
+                                   Click="OpenSteamBadges_Click" Appearance="Secondary"
+                                   Margin="0,0,10,6"/>
+                    </WrapPanel>
+
+                    <StackPanel x:Name="HelpPanel" Visibility="Collapsed" Margin="0,10,0,0">
+                        <Border Background="{DynamicResource ControlFillColorSecondaryBrush}"
+                                 CornerRadius="8" Padding="16">
+                            <StackPanel>
+                                <ui:TextBlock Text="{DynamicResource Settings_StepByStep}"
+                                              FontWeight="Bold" Margin="0,0,0,10"/>
+                                <ui:TextBlock Text="{DynamicResource Settings_Step1}" TextWrapping="Wrap" Margin="0,0,0,6"/>
+                                <ui:TextBlock Text="{DynamicResource Settings_Step2}" TextWrapping="Wrap" Margin="0,0,0,6"/>
+                                <ui:TextBlock Text="{DynamicResource Settings_Step3}" TextWrapping="Wrap" Margin="0,0,0,6"/>
+                                <ui:TextBlock Text="{DynamicResource Settings_CookieWarning}"
+                                              Appearance="Secondary" FontSize="11"
+                                              Margin="0,6,0,0" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+            </ui:Card>
+
+            <!-- ── Hours Farm Preferences ────────────────────────────────── -->
+            <ui:Card Margin="{DynamicResource ItemSpacing}" Padding="22">
+                <StackPanel>
+                    <ui:TextBlock Text="Preferências do Farm de Horas"
+                                  FontWeight="Bold" FontSize="16" Margin="0,0,0,6"/>
+                    <ui:TextBlock Text="Configure o comportamento de execução ao adicionar tempo de jogo nos seus títulos."
+                                  Appearance="Secondary" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,16"/>
+
+                    <CheckBox Content="Iniciar farm de horas automaticamente ao adicionar jogo"
+                              IsChecked="{Binding HoursFarmAutoStart, Mode=TwoWay}"
+                              FontWeight="SemiBold" Margin="0,0,0,16"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,16,0">
+                            <ui:TextBlock Text="Modo de Execução de Horas"
+                                          FontWeight="SemiBold"/>
+                            <ui:TextBlock Text="Escolha se múltiplos jogos rodam juntos ou sequencialmente um por um."
+                                          Appearance="Secondary" FontSize="12" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                        </StackPanel>
+                        <ComboBox Grid.Column="1" Width="260" VerticalAlignment="Center"
+                                  SelectedValuePath="Tag"
+                                  SelectedValue="{Binding HoursFarmMode, Mode=TwoWay}">
+                            <ComboBoxItem Content="Todos simultaneamente (Padrão Steam)" Tag="Simultaneous"/>
+                            <ComboBoxItem Content="Um por um (Sequencial)" Tag="Sequential"/>
+                        </ComboBox>
+                    </Grid>
+                </StackPanel>
+            </ui:Card>
+
+            <!-- ── Card Farm Preferences ─────────────────────────────────── -->
+            <ui:Card Margin="{DynamicResource ItemSpacing}" Padding="22">
+                <StackPanel>
+                    <ui:TextBlock Text="Preferências do Farm de Cartas"
+                                  FontWeight="Bold" FontSize="16" Margin="0,0,0,6"/>
+                    <ui:TextBlock Text="Personalize a estratégia de drop de cartas colecionáveis da sua conta."
+                                  Appearance="Secondary" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,16"/>
+
+                    <Grid Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,16,0">
+                            <ui:TextBlock Text="Estratégia de Farm de Cartas"
+                                          FontWeight="SemiBold"/>
+                            <ui:TextBlock Text="Rodar todos os jogos com cartas juntos ou focar em um jogo por vez."
+                                          Appearance="Secondary" FontSize="12" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                        </StackPanel>
+                        <ComboBox Grid.Column="1" Width="260" VerticalAlignment="Center"
+                                  SelectedValuePath="Tag"
+                                  SelectedValue="{Binding CardFarmMode, Mode=TwoWay}">
+                            <ComboBoxItem Content="Todos simultaneamente (Mais rápido)" Tag="Simultaneous"/>
+                            <ComboBoxItem Content="Um por um (Sequencial)" Tag="Sequential"/>
+                        </ComboBox>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,16,0">
+                            <ui:TextBlock Text="Trava de Segurança de Horas Registradas"
+                                          FontWeight="SemiBold"/>
+                            <ui:TextBlock Text="Protege contra perda do direito de reembolso de 2 horas da política Steam."
+                                          Appearance="Secondary" FontSize="12" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                        </StackPanel>
+                        <ComboBox Grid.Column="1" Width="260" VerticalAlignment="Center"
+                                  SelectedValuePath="Tag"
+                                  SelectedValue="{Binding CardFarmMinHours, Mode=TwoWay}">
+                            <ComboBoxItem Content="Farmar todos os jogos com cartas (0h+)" Tag="0.0"/>
+                            <ComboBoxItem Content="Apenas jogos com mais de 2h (Pós-Reembolso)" Tag="2.0"/>
+                            <ComboBoxItem Content="Apenas jogos com mais de 5h registradas" Tag="5.0"/>
+                        </ComboBox>
+                    </Grid>
+                </StackPanel>
+            </ui:Card>
+
+            <!-- ── Action bar ────────────────────────────────────────────── -->
+            <Grid Margin="0,8,0,32">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <ui:TextBlock x:Name="SaveStatusText" Grid.Column="0"
+                              VerticalAlignment="Center"
+                              TextWrapping="Wrap" Margin="0,0,14,0"
+                              Text="{Binding SaveStatus}"
+                              Foreground="{DynamicResource SystemAccentColorBrush}"
+                              FontWeight="SemiBold"/>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <ui:Button x:Name="TestConnectionBtn"
+                               Content="{DynamicResource Settings_TestConnectionBtn}"
+                               Icon="{ui:SymbolIcon Symbol=PlugConnected24}"
+                               Click="TestConnection_Click"
+                               Margin="0,0,10,0" Padding="20,10"/>
+                    <ui:Button Content="{DynamicResource Settings_ClearBtn}"
+                               Icon="{ui:SymbolIcon Symbol=Delete24}"
+                               Command="{Binding ClearCommand}"
+                               Margin="0,0,10,0" Padding="20,10"/>
+                </StackPanel>
+
+                <ui:Button Grid.Column="2"
+                           Content="{DynamicResource Settings_SaveBtn}"
+                           Appearance="Primary"
+                           Icon="{ui:SymbolIcon Symbol=Save24}"
+                           Command="{Binding SaveCommand}"
+                           Padding="24,10"/>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

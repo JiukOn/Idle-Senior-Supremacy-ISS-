@@ -1,0 +1,210 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=System.Runtime">
+
+    <!-- ── Navegação ─────────────────────────────────────────────────────── -->
+    <s:String x:Key="Nav_Dashboard">Dashboard</s:String>
+    <s:String x:Key="Nav_CardFarm">Farm de Cartas</s:String>
+    <s:String x:Key="Nav_HoursFarm">Farm de Horas</s:String>
+    <s:String x:Key="Nav_Library">Minha Biblioteca</s:String>
+    <s:String x:Key="Nav_Achievements">Conquistas</s:String>
+    <s:String x:Key="Nav_Settings">Configurações</s:String>
+
+    <!-- ── Painel lateral (MainWindow) ───────────────────────────────────── -->
+    <s:String x:Key="Panel_SteamStats">Estatísticas Steam</s:String>
+    <s:String x:Key="Panel_Playing">Jogando</s:String>
+    <s:String x:Key="Panel_Rating">Avaliação</s:String>
+    <s:String x:Key="Panel_PlaytimeEstimates">Estimativas de Tempo de Jogo</s:String>
+    <s:String x:Key="Panel_HowLong">HowLongToBeat</s:String>
+    <s:String x:Key="Panel_MainStory">Campanha / História</s:String>
+    <s:String x:Key="Panel_Complete">100% / Platinar (PC)</s:String>
+    <s:String x:Key="Panel_AboutGame">Sobre o Jogo</s:String>
+    <s:String x:Key="Panel_GameDesc">Descrição do jogo...</s:String>
+    <s:String x:Key="Panel_ManageAchievements">Gerenciar Conquistas</s:String>
+    <s:String x:Key="Panel_AddHoursFarm">Adicionar ao Farm de Horas</s:String>
+    <s:String x:Key="Panel_InHoursFarm">✔ Na Fila de Horas</s:String>
+
+    <!-- ── Dashboard ─────────────────────────────────────────────────────── -->
+    <s:String x:Key="Dash_Title">Resumo Geral</s:String>
+    <s:String x:Key="Dash_Subtitle">Bem-vindo de volta ao seu centro de controle Steam</s:String>
+    <s:String x:Key="Dash_Refresh">Atualizar Tudo</s:String>
+    <s:String x:Key="Dash_RecentGames">Jogado Recentemente</s:String>
+    <s:String x:Key="Dash_Collection">Sua Coleção</s:String>
+    <s:String x:Key="Dash_CollectionDesc">Total de jogos identificados na sua conta Steam</s:String>
+    <s:String x:Key="Dash_GamesAvail">JOGOS DISPONÍVEIS</s:String>
+    <s:String x:Key="Dash_PendingCards">Cartas Pendentes</s:String>
+    <s:String x:Key="Dash_SystemStatus">Status do Sistema</s:String>
+    <s:String x:Key="Dash_Operational">Operacional</s:String>
+    <s:String x:Key="Dash_TotalIdle">Tempo Total de Idle</s:String>
+    <s:String x:Key="Dash_PlaytimeSuffix">h jogadas</s:String>
+    <s:String x:Key="Dash_SyncCovers">Sincronizar e Baixar Capas</s:String>
+    <s:String x:Key="Dash_LibraryDiagnosis">Diagnóstico da Biblioteca</s:String>
+    <s:String x:Key="Dash_PurchasedGames">Jogos Comprados</s:String>
+    <s:String x:Key="Dash_NeverPlayed">Nunca Tocados (0h):</s:String>
+    <s:String x:Key="Dash_Under5h">Experimentados (&lt; 5h):</s:String>
+    <s:String x:Key="Dash_Over5h">Relevantes (5h+):</s:String>
+    <s:String x:Key="Dash_YourAchievements">Suas Conquistas</s:String>
+    <s:String x:Key="Dash_Unlocked">Desbloqueadas</s:String>
+    <s:String x:Key="Dash_PerfectGames">🏆 Jogos 100% (Platinas):</s:String>
+    <s:String x:Key="Dash_UnlockedLabel">🎯 Conquistas Desbloqueadas:</s:String>
+    <s:String x:Key="Dash_HunterPoints">✨ Pontos SteamHunters:</s:String>
+    <s:String x:Key="Dash_SyncAchievements">Atualizar Conquistas</s:String>
+    <s:String x:Key="Dash_AchievementsDisclaimer">Estatísticas oficiais via Steam API &amp; SteamHunters.</s:String>
+    <s:String x:Key="Dash_LibraryValue">Valor da Biblioteca</s:String>
+    <s:String x:Key="Dash_StoreValue">Valor Atual na Loja</s:String>
+    <s:String x:Key="Dash_SalesToday">🏷️ Com Promoções Hoje:</s:String>
+    <s:String x:Key="Dash_AvgPerPaidGame">📊 Média por Jogo Pago:</s:String>
+    <s:String x:Key="Dash_PaidGamesAnalyzed">📦 Jogos Pagos Analisados:</s:String>
+    <s:String x:Key="Dash_StoreDisclaimer">Baseado em dados oficiais da Steam Store (cache offline).</s:String>
+    <s:String x:Key="Dash_SyncPrices">Atualizar Preços</s:String>
+    <s:String x:Key="Dash_WhatToPlay">O Que Jogar Hoje?</s:String>
+    <s:String x:Key="Dash_RerollTooltip">Sortear outro jogo</s:String>
+    <s:String x:Key="Dash_ViewGame">Ver Jogo</s:String>
+    <s:String x:Key="Dash_RerollBtn">Sortear Outro</s:String>
+    <s:String x:Key="Dash_GameUpdates">Atualizações dos Seus Jogos</s:String>
+    <s:String x:Key="Dash_OfficialSteamNotes">Notas oficiais da comunidade Steam</s:String>
+    <s:String x:Key="Dash_TriviaTitle">CURIOSIDADE GAMER</s:String>
+    <s:String x:Key="Dash_DidYouKnow">• Você sabia?</s:String>
+    <s:String x:Key="Dash_NextFact">Próximo Fato</s:String>
+    <s:String x:Key="Dash_VacClean">🟢 VAC Limpo</s:String>
+    <s:String x:Key="Dash_VacBanned">🔴 Banimento VAC</s:String>
+    <s:String x:Key="Dash_TradeActive">🟢 Comércio Ativo</s:String>
+    <s:String x:Key="Dash_TradeRestricted">🟡 Comércio Restrito</s:String>
+
+    <!-- ── Farm de Cartas ────────────────────────────────────────────────── -->
+    <s:String x:Key="CardFarm_Title">Farm de Cartas</s:String>
+    <s:String x:Key="CardFarm_Subtitle">Simule tempo de jogo para liberar as cartas pendentes na Steam</s:String>
+    <s:String x:Key="CardFarm_StatusStopped">STATUS: PARADO</s:String>
+    <s:String x:Key="CardFarm_NoGame">Nenhum jogo em execução</s:String>
+    <s:String x:Key="CardFarm_QueueHeader">FILA DE PROCESSAMENTO</s:String>
+    <s:String x:Key="CardFarm_RefreshTooltip">Atualizar Fila</s:String>
+    <s:String x:Key="CardFarm_CardsLeft">cartas restantes</s:String>
+    <s:String x:Key="CardFarm_Disclaimer">O farm funciona simulando o appid do jogo. Não abra jogos com VAC durante o processo.</s:String>
+    <s:String x:Key="CardFarm_Stop">Parar Processo</s:String>
+    <s:String x:Key="CardFarm_Start">Iniciar Farm Automático</s:String>
+
+    <!-- ── Farm de Horas ─────────────────────────────────────────────────── -->
+    <s:String x:Key="HoursFarm_Title">Farm de Horas</s:String>
+    <s:String x:Key="HoursFarm_Subtitle">Acumule tempo de jogo em múltiplos títulos simultaneamente</s:String>
+    <s:String x:Key="HoursFarm_Placeholder">Digite o Nome do jogo ou AppID (ex: CS2 ou 730)</s:String>
+    <s:String x:Key="HoursFarm_AddBtn">Adicionar à Lista</s:String>
+    <s:String x:Key="HoursFarm_QueueHeader">FILA DE IDLE</s:String>
+    <s:String x:Key="HoursFarm_Running">EXECUTANDO</s:String>
+    <s:String x:Key="HoursFarm_RemoveTooltip">Remover</s:String>
+    <s:String x:Key="HoursFarm_Warning">Atenção: rodar muitos jogos simultaneamente pode instabilizar sua conexão Steam.</s:String>
+    <s:String x:Key="HoursFarm_Stop">Parar Todos</s:String>
+    <s:String x:Key="HoursFarm_Start">Iniciar Farm de Horas</s:String>
+
+    <!-- ── Biblioteca ────────────────────────────────────────────────────── -->
+    <s:String x:Key="Library_Title">Sua Biblioteca</s:String>
+    <s:String x:Key="Library_Subtitle">Navegue por todos os títulos da sua conta Steam</s:String>
+    <s:String x:Key="Library_SearchPlaceholder">Pesquisar por nome do jogo...</s:String>
+    <s:String x:Key="Library_SortLabel">Ordenar:</s:String>
+    <s:String x:Key="Library_Sort_Name">Alfabética (A-Z)</s:String>
+    <s:String x:Key="Library_Sort_Playtime">Tempo de Jogo</s:String>
+    <s:String x:Key="Library_Sort_Recent">Recentes</s:String>
+    <s:String x:Key="Library_Sort_Completion">Conquistas %</s:String>
+    <s:String x:Key="Library_Sort_Release">Lançamento</s:String>
+    <s:String x:Key="Library_GamesSuffix">jogos</s:String>
+
+    <!-- ── Conquistas (lista) ─────────────────────────────────────────────── -->
+    <s:String x:Key="Ach_Title">Conquistas Steam</s:String>
+    <s:String x:Key="Ach_Subtitle">Gerencie e visualize seu progresso de forma inteligente</s:String>
+    <s:String x:Key="Ach_SearchPlaceholder">Buscar jogos na sua biblioteca...</s:String>
+    <s:String x:Key="Ach_SortLabel">Ordenar:</s:String>
+    <s:String x:Key="Ach_Sort_Name">Nome (A-Z)</s:String>
+    <s:String x:Key="Ach_Sort_Playtime">Tempo de Jogo</s:String>
+    <s:String x:Key="Ach_Sort_Recent">Recentes</s:String>
+    <s:String x:Key="Ach_Sort_Completion">Conclusão %</s:String>
+    <s:String x:Key="Ach_TotalSuffix">total</s:String>
+
+    <!-- ── Editor de Conquistas ──────────────────────────────────────────── -->
+    <s:String x:Key="AchEd_Loading">Carregando jogo...</s:String>
+    <s:String x:Key="AchEd_GuidesBtn">Guias da Comunidade</s:String>
+    <s:String x:Key="AchEd_Invert">Inverter</s:String>
+    <s:String x:Key="AchEd_UnlockAll">Desbloquear Todas</s:String>
+    <s:String x:Key="AchEd_LockAll">Bloquear Todas</s:String>
+    <s:String x:Key="AchEd_Save">Salvar</s:String>
+    <s:String x:Key="AchEd_FilterPlaceholder">Filtrar por nome ou descrição...</s:String>
+    <s:String x:Key="AchEd_SortLabel">Ordenar:</s:String>
+    <s:String x:Key="AchEd_Sort_Alpha">Alfabética</s:String>
+    <s:String x:Key="AchEd_Sort_Date">Data de Desbloqueio</s:String>
+    <s:String x:Key="AchEd_Sort_Status">Status (Bloqueada)</s:String>
+    <s:String x:Key="AchEd_Sort_Rarity">Raridade (Ordem Natural)</s:String>
+    <s:String x:Key="AchEd_Sort_Timeline">Cronograma (#1, #2...)</s:String>
+    <s:String x:Key="AchEd_Achieved">CONQUISTADAS</s:String>
+    <s:String x:Key="AchEd_UnlockedOn">DESBLOQUEADA EM</s:String>
+    <s:String x:Key="AchEd_OrganicTitle">FARM ORGÂNICO (HORAS + CONQUISTAS SINCRONIZADAS)</s:String>
+    <s:String x:Key="AchEd_OrganicSubtitle">Mantém o jogo rodando na Steam e desbloqueia cada conquista no tempo médio real respeitando pré-requisitos</s:String>
+    <s:String x:Key="AchEd_PaceLabel">Ritmo:</s:String>
+    <s:String x:Key="AchEd_Pace_Fast">⚡ Rápido (Speedrun SH)</s:String>
+    <s:String x:Key="AchEd_Pace_Median">🎯 Médio (Recomendado)</s:String>
+    <s:String x:Key="AchEd_Pace_Completionist">🐢 Completo (Mediana SH)</s:String>
+    <s:String x:Key="AchEd_Pace_Custom">⚙️ Personalizado (h)</s:String>
+    <s:String x:Key="AchEd_DiscountHours">Descontar horas já jogadas</s:String>
+    <s:String x:Key="AchEd_SimulateBtn">Gerar Cronograma</s:String>
+    <s:String x:Key="AchEd_StartOrganicBtn">Iniciar Farm Híbrido</s:String>
+    <s:String x:Key="AchEd_PauseOrganicBtn">Pausar Sessão</s:String>
+    <s:String x:Key="AchEd_ResumeOrganicBtn">Retomar Sessão</s:String>
+    <s:String x:Key="AchEd_UnlockNextBtn">Desbloquear Próxima</s:String>
+    <s:String x:Key="AchEd_ResetScheduleBtn">Redefinir</s:String>
+
+    <!-- ── Configurações ─────────────────────────────────────────────────── -->
+    <s:String x:Key="Settings_Title">Configurações</s:String>
+    <s:String x:Key="Settings_Subtitle">Personalize o app e conecte sua conta Steam</s:String>
+    <s:String x:Key="Settings_AppearanceSection">Aparência e Tema</s:String>
+    <s:String x:Key="Settings_ThemeLabel">Tema do aplicativo</s:String>
+    <s:String x:Key="Settings_ThemeDesc">Altere a aparência visual do Idle Senior Supremacy</s:String>
+    <s:String x:Key="Settings_Theme_Light">Claro</s:String>
+    <s:String x:Key="Settings_Theme_Spring">🌸 Primavera (Claro / Laranja)</s:String>
+    <s:String x:Key="Settings_Theme_Dark">Escuro</s:String>
+    <s:String x:Key="Settings_Theme_Dracula">🧛 Dracula (Bordô)</s:String>
+    <s:String x:Key="Settings_Theme_Midnight">🌌 Meia Noite (Roxo)</s:String>
+    <s:String x:Key="Settings_LanguageSection">Idioma</s:String>
+    <s:String x:Key="Settings_LanguageLabel">Idioma do aplicativo</s:String>
+    <s:String x:Key="Settings_LanguageDesc">Escolha o idioma exibido na interface</s:String>
+    <s:String x:Key="Settings_Lang_PTBR">Português (pt-BR)</s:String>
+    <s:String x:Key="Settings_Lang_ENUS">English (en-US)</s:String>
+    <s:String x:Key="Settings_SteamSection">Identidade Steam</s:String>
+    <s:String x:Key="Settings_SteamDesc">Necessário para carregar sua biblioteca e conquistas. Você pode detectar automaticamente da sua Steam instalada no PC!</s:String>
+    <s:String x:Key="Settings_AutoDetectBtn">⚡ Detectar Conta Steam do PC</s:String>
+    <s:String x:Key="Settings_ResolveUrlBtn">🔍 Buscar ID pelo Link/Nick</s:String>
+    <s:String x:Key="Settings_OpenApiKeyPageBtn">🔑 Abrir Página Oficial de API Key</s:String>
+    <s:String x:Key="Settings_OpenSteamBadgesBtn">🌐 Abrir Steam Community (para Cookies)</s:String>
+    <s:String x:Key="Settings_SteamId64Label">SteamID64</s:String>
+    <s:String x:Key="Settings_SteamId64Placeholder">765611980... (número de 17 dígitos)</s:String>
+    <s:String x:Key="Settings_ProfileUrlLabel">URL do Perfil</s:String>
+    <s:String x:Key="Settings_ProfileUrlPlaceholder">https://steamcommunity.com/id/seu_nick</s:String>
+    <s:String x:Key="Settings_ApiKeyLabel">Steam Web API Key</s:String>
+    <s:String x:Key="Settings_ApiKeyPlaceholder">Chave da API (opcional, melhora biblioteca e conquistas)</s:String>
+    <s:String x:Key="Settings_ApiKeyHint">Obtenha gratuitamente em: steamcommunity.com/dev/apikey</s:String>
+    <s:String x:Key="Settings_FarmSection">Autenticação para Farm de Cartas</s:String>
+    <s:String x:Key="Settings_FarmDesc">Cookies de sessão necessários para acessar sua página de emblemas.</s:String>
+    <s:String x:Key="Settings_SessionIdHint">Cole o valor do cookie sessionid (ficará oculto)</s:String>
+    <s:String x:Key="Settings_LoginSecureHint">Cole o valor do cookie steamLoginSecure (ficará oculto)</s:String>
+    <s:String x:Key="Settings_HowToGet">Como obter esses cookies?</s:String>
+    <s:String x:Key="Settings_StepByStep">Passo a passo:</s:String>
+    <s:String x:Key="Settings_Step1">1. Acesse steamcommunity.com e faça login.</s:String>
+    <s:String x:Key="Settings_Step2">2. Pressione F12 → Aba Application → Storage → Cookies.</s:String>
+    <s:String x:Key="Settings_Step3">3. Procure por 'sessionid' e 'steamLoginSecure' e copie os valores.</s:String>
+    <s:String x:Key="Settings_CookieWarning">Atenção: os cookies expiram quando você faz logout. Renove se o farm parar de funcionar.</s:String>
+    <s:String x:Key="Settings_ClearBtn">Limpar</s:String>
+    <s:String x:Key="Settings_TestConnectionBtn">Testar Conexão</s:String>
+    <s:String x:Key="Settings_SaveBtn">Salvar Configurações</s:String>
+    <s:String x:Key="Settings_Saved">✔ Configurações salvas com sucesso!</s:String>
+    <s:String x:Key="Settings_Cleared">Configurações limpas.</s:String>
+
+    <!-- ── Mensagens de erro / estado (código-behind) ─────────────────────── -->
+    <s:String x:Key="Err_LoadAchievements">Erro ao carregar conquistas</s:String>
+    <s:String x:Key="Err_SteamOpen">Certifique-se de que a Steam está aberta.</s:String>
+    <s:String x:Key="Err_SaveSuccess">Conquistas salvas com sucesso!</s:String>
+    <s:String x:Key="Err_SaveFail">Falha ao salvar conquistas. O Steam está aberto?</s:String>
+    <s:String x:Key="Err_ConfigRequired">Configuração necessária</s:String>
+    <s:String x:Key="Err_ConfigRequiredMsg">Para carregar conquistas você precisa de:&#10;&#10;• Steam API Key — obtenha em steamcommunity.com/dev/apikey&#10;• SteamID64 — seu número de perfil de 17 dígitos&#10;&#10;Configure ambos na aba Configurações e tente novamente.</s:String>
+    <s:String x:Key="Err_Unexpected">Ocorreu um erro inesperado</s:String>
+    <s:String x:Key="Err_AppContinues">O aplicativo continuará em execução.</s:String>
+    <s:String x:Key="Word_Success">Sucesso</s:String>
+    <s:String x:Key="Word_Error">Erro</s:String>
+    <s:String x:Key="Word_Info">Informação</s:String>
+
+</ResourceDictionary>

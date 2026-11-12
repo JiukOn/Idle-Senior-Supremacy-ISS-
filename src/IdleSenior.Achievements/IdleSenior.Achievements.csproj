@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\IdleSenior.Core\IdleSenior.Core.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>x86</PlatformTarget>
+    <!-- Suppress warnings from legacy SAM code (fields set via P/Invoke marshaling, Windows-only registry) -->
+    <NoWarn>$(NoWarn);CS0649;CA1416;CS8618;CS8603;CS8625;CS8605;CS8600;CS8601;SYSLIB0051</NoWarn>
+  </PropertyGroup>
+
+</Project>

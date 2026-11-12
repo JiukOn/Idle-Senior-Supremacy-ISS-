@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c084fc"/>
+      <stop offset="100%" stop-color="#9333ea"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#50fa7b"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Top Halo / Crown -->
+  <path d="M 164 126 C 164 76, 348 76, 348 126 C 348 148, 314 152, 256 148 C 198 152, 164 148, 164 126 Z"
+        fill="#161224" stroke="url(#purpleGrad)" stroke-width="14" stroke-linejoin="round"/>
+  <circle cx="256" cy="112" r="14" fill="none" stroke="url(#greenGrad)" stroke-width="10"/>
+
+  <!-- Left Wing -->
+  <path d="M 186 196 C 120 206, 64 236, 66 266 C 68 290, 126 290, 148 292 C 100 304, 68 332, 76 358 C 84 382, 134 374, 152 372 C 110 388, 92 414, 108 426 C 130 442, 186 420, 198 400 C 176 368, 178 326, 200 296 C 216 270, 208 220, 186 196 Z"
+        fill="#161224" stroke="url(#purpleGrad)" stroke-width="13" stroke-linejoin="round"/>
+  <path d="M 134 272 C 162 276, 164 306, 142 324 C 122 340, 134 366, 148 370"
+        fill="none" stroke="url(#greenGrad)" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Right Wing -->
+  <path d="M 326 196 C 392 206, 448 236, 446 266 C 444 290, 386 290, 364 292 C 412 304, 444 332, 436 358 C 428 382, 378 374, 360 372 C 402 388, 420 414, 404 426 C 382 442, 326 420, 314 400 C 336 368, 334 326, 312 296 C 296 270, 304 220, 326 196 Z"
+        fill="#161224" stroke="url(#purpleGrad)" stroke-width="13" stroke-linejoin="round"/>
+  <path d="M 378 272 C 350 276, 348 306, 370 324 C 390 340, 378 366, 364 370"
+        fill="none" stroke="url(#greenGrad)" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Central Hourglass Body -->
+  <path d="M 188 186 C 188 158, 324 158, 324 186 C 324 236, 282 260, 282 296 C 282 332, 324 358, 324 404 C 324 438, 188 438, 188 404 C 188 358, 230 332, 230 296 C 230 260, 188 236, 188 186 Z"
+        fill="#161224" stroke="url(#purpleGrad)" stroke-width="14" stroke-linejoin="round"/>
+
+  <!-- Inner Green Hourglass Core -->
+  <path d="M 232 206 L 256 234 L 280 206 M 256 234 L 256 358 M 234 392 L 256 358 L 278 392"
+        fill="none" stroke="url(#greenGrad)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

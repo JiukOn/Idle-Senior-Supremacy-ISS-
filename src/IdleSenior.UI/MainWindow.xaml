@@ -1,0 +1,329 @@
+<ui:FluentWindow x:Class="IdleSenior.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IdleSenior.UI"
+        xmlns:pages="clr-namespace:IdleSenior.UI.Views.Pages"
+        xmlns:helpers="clr-namespace:IdleSenior.UI.Helpers"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        mc:Ignorable="d"
+        Title="Idle Senior Supremacy"
+        Icon="pack://application:,,,/Resources/iss-icon.ico"
+        Height="720" Width="1120" MinHeight="600" MinWidth="900"
+        ExtendsContentIntoTitleBar="True"
+        WindowBackdropType="Mica"
+        WindowCornerPreference="Round"
+        Background="{DynamicResource ApplicationBackgroundBrush}">
+
+    <Grid Background="{DynamicResource ApplicationBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <ui:TitleBar Grid.Row="0" Grid.ColumnSpan="2" Title="Idle Senior Supremacy">
+            <ui:TitleBar.Icon>
+                <ui:ImageIcon Source="pack://application:,,,/Resources/iss-icon.ico" Width="18" Height="18"/>
+            </ui:TitleBar.Icon>
+        </ui:TitleBar>
+
+        <ui:NavigationView Grid.Row="1" Grid.Column="0" x:Name="RootNavigation"
+                           PaneDisplayMode="Left">
+            <ui:NavigationView.MenuItems>
+                <ui:NavigationViewItem Content="{DynamicResource Nav_Dashboard}"
+                                       Icon="{ui:SymbolIcon Symbol=Home24}"
+                                       TargetPageType="{x:Type pages:DashboardPage}"/>
+                <ui:NavigationViewItem Content="{DynamicResource Nav_CardFarm}"
+                                       Icon="{ui:SymbolIcon Symbol=Collections24}"
+                                       TargetPageType="{x:Type pages:CardFarmPage}"/>
+                <ui:NavigationViewItem Content="Farm de Horas"
+                                       Icon="{ui:SymbolIcon Symbol=History24}"
+                                       TargetPageType="{x:Type pages:HoursFarmQueuePage}"/>
+                <ui:NavigationViewItem Content="{DynamicResource Nav_Library}"
+                                       Icon="{ui:SymbolIcon Symbol=Library24}"
+                                       TargetPageType="{x:Type pages:LibraryPage}"/>
+            </ui:NavigationView.MenuItems>
+            <ui:NavigationView.FooterMenuItems>
+                <!-- Dynamic Active Tasks Card (Only visible when background tasks are running) -->
+                <Border x:Name="ActiveTasksCard"
+                        Visibility="Collapsed"
+                        Background="{DynamicResource ControlFillColorSecondaryBrush}"
+                        BorderBrush="{DynamicResource SystemAccentColorBrush}"
+                        BorderThickness="1"
+                        CornerRadius="10"
+                        Margin="8,4,8,8"
+                        Padding="12,10">
+                    <StackPanel>
+                        <!-- Farm de Horas Ativo -->
+                        <Grid x:Name="ActiveHoursRow" Visibility="Collapsed" Margin="0,0,0,4"
+                              Background="Transparent" Cursor="Hand"
+                              MouseLeftButtonUp="ActiveHoursRow_Click">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ui:SymbolIcon Symbol="History24" Foreground="{DynamicResource SystemAccentColorBrush}"
+                                           FontSize="16" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                            <ui:TextBlock x:Name="ActiveHoursTitle" Grid.Column="1"
+                                          Text="Farm de Horas" FontWeight="Bold" FontSize="11"
+                                          TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                            <ui:TextBlock x:Name="ActiveHoursTimer" Grid.Column="2"
+                                          Text="00:00:00" FontSize="11" FontWeight="SemiBold"
+                                          Foreground="{DynamicResource SystemAccentColorBrush}"
+                                          VerticalAlignment="Center"/>
+                        </Grid>
+
+                        <!-- Conquistas Orgânicas Ativas -->
+                        <Grid x:Name="ActiveAchievementsRow" Visibility="Collapsed" Margin="0,0,0,4"
+                              Background="Transparent" Cursor="Hand"
+                              MouseLeftButtonUp="ActiveAchievementsRow_Click">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ui:SymbolIcon Symbol="Trophy24" Foreground="#ffb86c"
+                                           FontSize="16" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                            <ui:TextBlock x:Name="ActiveAchTitle" Grid.Column="1"
+                                          Text="Conquistas" FontWeight="Bold" FontSize="11"
+                                          TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                            <ui:TextBlock x:Name="ActiveAchCountdown" Grid.Column="2"
+                                          Text="—" FontSize="11" FontWeight="SemiBold"
+                                          Foreground="#ffb86c" VerticalAlignment="Center"/>
+                        </Grid>
+
+                        <!-- Farm de Cartas Ativo -->
+                        <Grid x:Name="ActiveCardsRow" Visibility="Collapsed"
+                              Background="Transparent" Cursor="Hand"
+                              MouseLeftButtonUp="ActiveCardsRow_Click">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ui:SymbolIcon Symbol="Collections24" Foreground="#50fa7b"
+                                           FontSize="16" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                            <ui:TextBlock x:Name="ActiveCardsTitle" Grid.Column="1"
+                                          Text="Farm de Cartas" FontWeight="Bold" FontSize="11"
+                                          TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                            <ui:TextBlock x:Name="ActiveCardsCount" Grid.Column="2"
+                                          Text="—" FontSize="11" FontWeight="SemiBold"
+                                          Foreground="#50fa7b" VerticalAlignment="Center"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <ui:NavigationViewItem Content="{DynamicResource Nav_Settings}"
+                                       Icon="{ui:SymbolIcon Symbol=Settings24}"
+                                       TargetPageType="{x:Type pages:SettingsPage}"/>
+            </ui:NavigationView.FooterMenuItems>
+        </ui:NavigationView>
+
+        <!-- ── Game Info Side Panel ──────────────────────────────────────── -->
+        <Border Grid.Row="1" Grid.Column="1" x:Name="GameInfoPanel"
+                Width="340"
+                Background="{DynamicResource ApplicationBackgroundBrush}"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                BorderThickness="1,0,0,0"
+                Visibility="Collapsed">
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          helpers:ScrollBubbleHelper.EnableSmoothScroll="True">
+                <StackPanel Margin="18,14,18,20">
+
+                    <!-- Close button -->
+                    <ui:Button Icon="{ui:SymbolIcon Symbol=Dismiss24}"
+                               HorizontalAlignment="Right"
+                               Click="CloseGameInfo_Click"
+                               Appearance="Transparent"
+                               Padding="6"/>
+
+                    <!-- Banner image -->
+                    <Border CornerRadius="10" ClipToBounds="True" Margin="0,8,0,14">
+                        <Image x:Name="GameBanner" Stretch="UniformToFill" Height="148"/>
+                    </Border>
+
+                    <ui:TextBlock x:Name="GameName"
+                                  Text="—" FontWeight="Bold" FontSize="18"
+                                  TextWrapping="Wrap" Margin="0,0,0,4"/>
+                    <ui:TextBlock x:Name="GameDev"
+                                  Text="—" Appearance="Secondary" FontSize="12"
+                                  Margin="0,0,0,10"/>
+
+                    <!-- Store Price + Discount Badge + Ver na Steam -->
+                    <Grid Margin="0,0,0,14">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                            <Border x:Name="GameDiscountBadge" Visibility="Collapsed"
+                                    Background="#2250fa7b" CornerRadius="5" Padding="6,2" Margin="0,0,8,0"
+                                    VerticalAlignment="Center">
+                                <ui:TextBlock x:Name="GameDiscountText" Text="-0%"
+                                              FontSize="11" FontWeight="Bold" Foreground="#50fa7b"/>
+                            </Border>
+                            <TextBlock x:Name="GameInitialPriceText" Visibility="Collapsed"
+                                       Text="" FontSize="11"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                       TextDecorations="Strikethrough"
+                                       VerticalAlignment="Center" Margin="0,0,6,0"/>
+                            <ui:TextBlock x:Name="GamePriceText"
+                                          Text="—" FontSize="14" FontWeight="Bold"
+                                          VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <ui:Button Grid.Column="1" x:Name="OpenInSteamBtn"
+                                   Content="Ver na Steam"
+                                   Icon="{ui:SymbolIcon Symbol=Open24}"
+                                   Appearance="Secondary"
+                                   Click="OpenInSteam_Click"
+                                   Padding="10,6" FontSize="11"/>
+                    </Grid>
+
+                    <!-- Steam Stats -->
+                    <ui:Card Margin="0,0,0,12" Padding="14">
+                        <StackPanel>
+                            <ui:TextBlock Text="{DynamicResource Panel_SteamStats}"
+                                          FontWeight="Bold" FontSize="12"
+                                          Margin="0,0,0,10"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <ui:TextBlock Text="{DynamicResource Panel_Playing}"
+                                                  Appearance="Secondary" FontSize="11"/>
+                                    <ui:TextBlock x:Name="SteamPlayers"
+                                                  Text="—" FontSize="16" FontWeight="Bold"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1">
+                                    <ui:TextBlock Text="{DynamicResource Panel_Rating}"
+                                                  Appearance="Secondary" FontSize="11"/>
+                                    <ui:TextBlock x:Name="SteamRating"
+                                                  Text="— %" FontSize="16" FontWeight="Bold"/>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </ui:Card>
+
+                    <!-- Security / Anti-Cheat Advisory Badge -->
+                    <Border x:Name="SecurityBadgeBorder"
+                            CornerRadius="8" Padding="12,8" Margin="0,0,0,12"
+                            Background="{DynamicResource ControlFillColorSecondaryBrush}">
+                        <StackPanel>
+                            <ui:TextBlock x:Name="SecurityBadgeTitle"
+                                          Text="🟢 Sem Anti-Cheat"
+                                          FontWeight="Bold" FontSize="12"
+                                          Foreground="{DynamicResource SystemAccentColorBrush}"/>
+                            <ui:TextBlock x:Name="SecurityBadgeDesc"
+                                          Text="Nenhum sistema anti-cheat restritivo detectado."
+                                          Appearance="Secondary" FontSize="11" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- HowLongToBeat / SteamHunters (Unified Playtime) -->
+                    <ui:Card Margin="0,0,0,12" Padding="14">
+                        <StackPanel>
+                            <ui:TextBlock Text="{DynamicResource Panel_PlaytimeEstimates}"
+                                          FontWeight="Bold" FontSize="12"
+                                          TextWrapping="Wrap"
+                                          Margin="0,0,0,10"/>
+
+                            <!-- Row 1: Main Story -->
+                            <Grid Margin="0,0,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0">
+                                    <ui:TextBlock Text="{DynamicResource Panel_MainStory}"
+                                                  FontWeight="SemiBold" FontSize="12" TextWrapping="Wrap"/>
+                                    <ui:TextBlock x:Name="HLTBMainSource"
+                                                  Text="" Appearance="Secondary" FontSize="10"
+                                                  TextWrapping="Wrap" Margin="0,2,0,0"/>
+                                </StackPanel>
+                                <ui:TextBlock x:Name="HLTBMain" Grid.Column="1"
+                                              Text="— h" FontSize="16" FontWeight="Bold"
+                                              VerticalAlignment="Center"
+                                              Foreground="{DynamicResource SystemAccentColorBrush}"/>
+                            </Grid>
+
+                            <Border Height="1" Background="{DynamicResource ControlStrokeColorDefaultBrush}" Margin="0,0,0,10"/>
+
+                            <!-- Row 2: 100% Completion -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0">
+                                    <ui:TextBlock Text="{DynamicResource Panel_Complete}"
+                                                  FontWeight="SemiBold" FontSize="12" TextWrapping="Wrap"/>
+                                    <ui:TextBlock x:Name="HLTB100Source"
+                                                  Text="" Appearance="Secondary" FontSize="10"
+                                                  TextWrapping="Wrap" Margin="0,2,0,0"/>
+                                </StackPanel>
+                                <ui:TextBlock x:Name="HLTB100" Grid.Column="1"
+                                              Text="— h" FontSize="16" FontWeight="Bold"
+                                              VerticalAlignment="Center"
+                                              Foreground="{DynamicResource SystemAccentColorBrush}"/>
+                            </Grid>
+                        </StackPanel>
+                    </ui:Card>
+
+                    <!-- Quick Actions -->
+                    <StackPanel Margin="0,0,0,16">
+                        <!-- Botão Conquistas 🏆 -->
+                        <ui:Button x:Name="PanelManageAchBtn"
+                                   Content="Conquistas 🏆"
+                                   Icon="{ui:SymbolIcon Symbol=Trophy24}"
+                                   Appearance="Primary"
+                                   HorizontalAlignment="Stretch"
+                                   Click="PanelManageAchievements_Click"
+                                   Padding="14,10"
+                                   Margin="0,0,0,10"/>
+
+                        <!-- Farm de Horas Enxuto (Input de Horas + Seta) -->
+                        <ui:Card Padding="10" Margin="0,0,0,4">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ui:TextBox x:Name="PanelHoursTargetInput" Grid.Column="0"
+                                            PlaceholderText="Qtd. de Horas (ex: 10)"
+                                            Icon="{ui:SymbolIcon Symbol=History24}"
+                                            Margin="0,0,8,0"/>
+                                <ui:Button x:Name="PanelStartHoursBtn" Grid.Column="1"
+                                           Icon="{ui:SymbolIcon Symbol=ArrowRight24}"
+                                           Content="Farmar"
+                                           Appearance="Secondary"
+                                           Click="PanelStartHours_Click"
+                                           Padding="14,8"/>
+                            </Grid>
+                        </ui:Card>
+                        <ui:TextBlock x:Name="PanelHoursFeedback"
+                                      Text="" FontSize="11" FontWeight="SemiBold"
+                                      Foreground="#50fa7b" Margin="4,2,0,0"/>
+                    </StackPanel>
+
+                    <!-- About -->
+                    <ui:TextBlock Text="{DynamicResource Panel_AboutGame}"
+                                  FontWeight="Bold" Margin="0,0,0,6"/>
+                    <ui:TextBlock x:Name="GameDescription"
+                                  Text="{DynamicResource Panel_GameDesc}"
+                                  TextWrapping="Wrap" Appearance="Secondary" FontSize="13"/>
+                    <ui:TextBlock x:Name="GameMetaFootnote"
+                                  Text="" FontSize="11" Margin="0,12,0,0"
+                                  Foreground="#66FFFFFF" TextWrapping="Wrap"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</ui:FluentWindow>

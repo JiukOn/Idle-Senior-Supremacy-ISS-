@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\IdleSenior.Core\IdleSenior.Core.csproj" />
+    <ProjectReference Include="..\IdleSenior.Achievements\IdleSenior.Achievements.csproj" />
+    <ProjectReference Include="..\IdleSenior.Worker\IdleSenior.Worker.csproj">
+        <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\IdleSenior.AchievementWorker\IdleSenior.AchievementWorker.csproj">
+        <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+
+  <Target Name="CopyWorkerAndNativeFiles" AfterTargets="Build">
+    <ItemGroup>
+      <WorkerFiles Include="..\IdleSenior.Worker\bin\$(Configuration)\net9.0\**\*.*" />
+      <AchWorkerFiles Include="..\IdleSenior.AchievementWorker\bin\$(Configuration)\net9.0\**\*.*" />
+      <NativeDlls Include="..\NativeLibs\x64\steam_api64.dll;..\NativeLibs\x86\steam_api.dll" />
+    </ItemGroup>
+    <!-- Copy Idle Worker files next to the UI executable -->
+    <Copy SourceFiles="@(WorkerFiles)"
+          DestinationFiles="@(WorkerFiles->'$(OutputPath)%(RecursiveDir)%(Filename)%(Extension)')"
+          SkipUnchangedFiles="true" />
+    <!-- Copy Achievement Worker files next to the UI executable -->
+    <Copy SourceFiles="@(AchWorkerFiles)"
+          DestinationFiles="@(AchWorkerFiles->'$(OutputPath)%(RecursiveDir)%(Filename)%(Extension)')"
+          SkipUnchangedFiles="true" />
+    <!-- Native Steam DLLs must be in the same folder as executables -->
+    <Copy SourceFiles="@(NativeDlls)" DestinationFolder="$(OutputPath)" SkipUnchangedFiles="true" />
+  </Target>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.0" />
+    <PackageReference Include="WPF-UI" Version="4.2.1" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationIcon>..\..\assets\iss-icon.ico</ApplicationIcon>
+    <Version>1.0.0</Version>
+    <Product>Idle Senior Supremacy</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="..\..\assets\iss-icon.ico" Link="Resources\iss-icon.ico" />
+  </ItemGroup>
+
+</Project>
